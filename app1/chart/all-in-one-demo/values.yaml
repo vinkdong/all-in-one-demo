@@ -1,0 +1,47 @@
+# Default values for all-in-one-demo.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+# pod运行数量
+replicaCount: 1
+
+image:
+  # 镜像库地址
+  repository: vinkdong/all-in-one
+  # 镜像拉取策略
+  pullPolicy: IfNotPresent
+
+metrics:
+  # 收集应用的指标数据路径
+  path: /actuator/prometheus
+  # 性能指标应用分组
+  group: spring-boot
+  port: 8081
+
+logs:
+  # 日志收集格式
+  parser: spring-boot
+
+env:
+  open:
+    # 是否启用配置中心
+
+service:
+  # 是否创建k8s service
+  enabled: false
+  # service类型
+  type: ClusterIP
+  # service端口
+  port: 8080
+  # service名称
+  name: app1-service
+
+resources:
+  # k8s中容器能使用资源的资源最大值
+  limits:
+    cpu: 20m
+    memory: 120Mi
+  # k8s中容器使用的最小资源需求
+  requests:
+    cpu: 10m
+    memory: 100Mi
